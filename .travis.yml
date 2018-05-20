@@ -1,4 +1,4 @@
 language: csharp
 solution: VagasShow.sln
 script: 
-  - msbuild /p:Configuration=Release VagasShow.sln
+  - xbuild /p:Configuration=Release VagasShow.sln
