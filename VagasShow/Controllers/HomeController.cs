@@ -50,7 +50,6 @@ namespace VagasShow.Controllers
             Memoria.Add(vaga);
 
             return RedirectToAction("Index");
-            //return View("Index", Memoria.GetVagas());
         }
     }
 }
