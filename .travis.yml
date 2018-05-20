@@ -1,2 +1,4 @@
 language: csharp
 solution: VagasShow.sln
+script: 
+  - xbuild /p:Configuration=Release {VagasShow.sln}
