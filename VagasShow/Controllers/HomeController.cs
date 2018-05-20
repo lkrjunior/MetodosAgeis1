@@ -14,6 +14,12 @@ namespace VagasShow.Controllers
             return View(Memoria.GetVagas());
         }
 
+        [HttpPost]
+        public ActionResult Index(string pesquisa)
+        {
+            return View(Memoria.GetVagas(pesquisa));
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -43,7 +49,8 @@ namespace VagasShow.Controllers
             vaga.PreencheIdData();
             Memoria.Add(vaga);
 
-            return View("Index", Memoria.GetVagas());
+            return RedirectToAction("Index");
+            //return View("Index", Memoria.GetVagas());
         }
     }
 }

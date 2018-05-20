@@ -19,5 +19,10 @@ namespace VagasShow.Reposistory
         {
             return vagas;
         }
+
+        public static List<Vaga> GetVagas(string pesquisa)
+        {
+            return vagas.Where(x => x.Cargo.Contains(pesquisa)).ToList();
+        }
     }
 }
