@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -10,12 +11,21 @@ namespace VagasShow.Models
     {
         public Guid Id { get; private set; }
         public DateTime DataDeCriacao { get; private set; }
-        public string Titulo { get; private set; }
-        public string Cargo { get; private set; }
-        public string Descricao { get; private set; }
-        public decimal? Remuneracao { get; private set; }
+        [DisplayName("Titulo")]
+        public string Titulo { get; set; }
+        [DisplayName("Cargo")]
+        public string Cargo { get; set; }
+        [DisplayName("Descrição")]
+        public string Descricao { get; set; }
+        [DisplayName("Remuneração")]
+        public decimal? Remuneracao { get; set; }
 
-        public  Vaga(string titulo, string cargo, string descricao, decimal? remuneracao)
+        public Vaga()
+        {
+
+        }
+
+        public Vaga(string titulo, string cargo, string descricao, decimal? remuneracao)
         {
             ValidaIsNullOrWhiteSpace("Titulo", titulo);
             ValidaIsNullOrWhiteSpace("Cargo", cargo);
@@ -26,6 +36,11 @@ namespace VagasShow.Models
             this.Cargo = cargo;
             this.Descricao = descricao;
             this.Remuneracao = remuneracao;
+            this.PreencheIdData();
+        }
+
+        public void PreencheIdData()
+        {
             this.Id = Guid.NewGuid();
             this.DataDeCriacao = DateTime.Now;
         }
