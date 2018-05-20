@@ -44,7 +44,7 @@ namespace VagasShow.Controllers
         [HttpPost]
         public ActionResult Create(VagasShow.Models.Vaga vaga)
         {
-            ViewBag.Message = "Create.";
+            ViewBag.Message = "Salva os dados da vaga.";
 
             vaga.PreencheIdData();
             Memoria.Add(vaga);
