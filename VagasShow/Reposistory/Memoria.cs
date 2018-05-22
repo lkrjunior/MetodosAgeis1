@@ -15,6 +15,11 @@ namespace VagasShow.Reposistory
             vagas.Add(vaga);
         }
 
+        public static void LimpaVagas()
+        {
+            vagas = new List<Vaga>();
+        }
+
         public static List<Vaga> GetVagas()
         {
             return vagas;

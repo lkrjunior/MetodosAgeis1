@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VagasShow.Models;
+using VagasShow.Reposistory;
 
 namespace VagasShow.Tests
 {
@@ -40,8 +41,8 @@ namespace VagasShow.Tests
         - HU003 - Eu como candidato desejo visualizar os detalhes de uma vaga da listagem
 
         *Ao clicar em visualizar em uma das vagas, uma tela contendo os dados da vaga deve ser apresentada
+     
         
-
         */
 
 
@@ -63,6 +64,18 @@ namespace VagasShow.Tests
         public void GaranteExecaoAoEnviarDadosIncorretos()
         {
             var vaga = new Vaga("","","",-1);
+        }
+
+        [TestMethod]
+        public void FiltraCargo()
+        {
+            var vaga = new Vaga(titulo, cargo, descricao, remuneracao);
+            Memoria.Add(vaga);
+
+            var filtrando = Memoria.GetVagas(cargo);
+            Assert.IsTrue(filtrando != null && filtrando.Count > 0);
+
+            Memoria.LimpaVagas();
         }
     }
 }

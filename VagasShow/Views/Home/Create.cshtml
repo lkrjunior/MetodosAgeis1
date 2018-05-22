@@ -24,10 +24,25 @@
         <h4>Vaga</h4>
         <table>
             <tr>
-                <th>@Html.DisplayNameFor(model => model.Titulo)<br>@Html.TextBoxFor(model => model.Titulo)</th>
-                <th>@Html.DisplayNameFor(model => model.Cargo)<br>@Html.TextBoxFor(model => model.Cargo)</th>
-                <th>@Html.DisplayNameFor(model => model.Descricao)<br>@Html.TextBoxFor(model => model.Descricao)</th>
-                <th>@Html.DisplayNameFor(model => model.Remuneracao)<br>@Html.TextBoxFor(model => model.Remuneracao)</th>
+                <th>@Html.DisplayNameFor(model => model.Titulo)</th>
+                <th>@Html.TextBoxFor(model => model.Titulo)</th>
+                <th>@Html.ValidationMessageFor(model => model.Titulo)</th>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Cargo)</th>
+                <th>@Html.TextBoxFor(model => model.Cargo)</th>
+                <th>@Html.ValidationMessageFor(model => model.Cargo)</th>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Descricao)</th>
+                <th>@Html.TextBoxFor(model => model.Descricao)</th>
+                <th>@Html.ValidationMessageFor(model => model.Descricao)</th>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Remuneracao)</th>
+                <th>@Html.TextBoxFor(model => model.Remuneracao)</th>
+            </tr>
+            <tr>
                 <th></th>
             </tr>
         </table>
