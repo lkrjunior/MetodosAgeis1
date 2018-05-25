@@ -59,14 +59,14 @@ namespace VagasShow.Tests
             Assert.IsNotNull(vaga.DataDeCriacao);
         }
 
+        void CriaVaga()
+        {
+            var vaga = new Vaga("", "", "", -1);
+        }
+
         [Test]
         public void GaranteExecaoAoEnviarDadosIncorretos()
         {
-            void CriaVaga()
-            {
-                var vaga = new Vaga("", "", "", -1);
-            }
-
             Assert.Throws(typeof(ArgumentException), CriaVaga);
         }
 
