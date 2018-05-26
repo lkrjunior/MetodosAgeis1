@@ -43,5 +43,12 @@ namespace VagasShow.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public ActionResult Limpar()
+        {
+            Memoria.LimpaVagas();
+            return RedirectToAction("Index");
+        }
     }
 }
