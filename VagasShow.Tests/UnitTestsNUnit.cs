@@ -8,20 +8,7 @@ namespace VagasShow.Tests
     [TestFixture]
     public class UnitTestsNUnit
     {
-        private string titulo = "";
-        private string cargo = "";
-        private string descricao = "";
-        private decimal? remuneracao = -1;
-
-        [SetUp]
-        public void SetUp()
-        {
-            titulo = "Estagiário Sofredor";
-            cargo = "Estagirário";
-            descricao = "Fazer tudo que os seres superiores estão mandando";
-            remuneracao = null;
-        }
-
+        #region Histórias de usuários
         /*
         - HU0001 - Eu como recrutador desejo poder incluir uma nova vaga para ficar visível no mural de vagas(show)
          
@@ -40,36 +27,84 @@ namespace VagasShow.Tests
 
         - HU003 - Eu como candidato desejo visualizar os detalhes de uma vaga da listagem
 
-        *Ao clicar em visualizar em uma das vagas, uma tela contendo os dados da vaga deve ser apresentada
-     
-        
+        *Ao clicar em visualizar em uma das vagas, uma tela contendo os dados da vaga deve ser apresentada   
         */
+        #endregion
 
+        #region Atributos
+        private string titulo = "";
+        private string cargo = "";
+        private string descricao = "";
+        private decimal? remuneracao = null;
+        #endregion
 
+        #region Setup NUnit
+        [SetUp]
+        public void SetUp()
+        {
+            titulo = "Estagiário Sofredor";
+            cargo = "Estagiário";
+            descricao = "Fazer tudo que os seres superiores estão mandando";
+            remuneracao = null;
+        }
+        #endregion
+        
+        #region Metodos Privados
+        private Vaga PreencheVaga()
+        {
+            return new Vaga(titulo, cargo, descricao, remuneracao);
+        }
+        #endregion
 
+        #region HU001
         [Test]
         public void GaranteConsistenciaDaVaga()
         {
-            var vaga = new Vaga(titulo, cargo, descricao, remuneracao);
+            var vaga = this.PreencheVaga();
 
             Assert.AreEqual(titulo, vaga.Titulo);
             Assert.AreEqual(cargo, vaga.Cargo);
             Assert.AreEqual(descricao, vaga.Descricao);
             Assert.AreEqual(remuneracao, vaga.Remuneracao);
-            Assert.IsNotNull(vaga.DataDeCriacao);
         }
 
-        void CriaVaga()
+        [Test]
+        public void ValidaRemuneracaoNull()
         {
-            var vaga = new Vaga("", "", "", -1);
+            var vaga = this.PreencheVaga();
+
+            Assert.IsNull(vaga.Remuneracao);
+        }
+
+        [Test]
+        public void ValidaRemuneracaoNegativa()
+        {
+            Assert.Throws(typeof(ArgumentException), () => 
+            {
+                this.remuneracao = -10;
+                var vaga = this.PreencheVaga();
+            });
         }
 
         [Test]
         public void GaranteExecaoAoEnviarDadosIncorretos()
         {
-            Assert.Throws(typeof(ArgumentException), CriaVaga);
+            Assert.Throws(typeof(ArgumentException), () => 
+            {
+                var vaga = new Vaga("", "", "", null);
+            });
         }
 
+        [Test]
+        public void GarantePreenchimentoData()
+        {
+            var vaga = this.PreencheVaga();
+            Assert.IsNotNull(vaga.Id);
+            Assert.IsNotNull(vaga.DataDeCriacao);
+        }
+        #endregion
+
+        #region HU002
         [Test]
         public void FiltraCargo()
         {
@@ -81,5 +116,6 @@ namespace VagasShow.Tests
 
             Memoria.LimpaVagas();
         }
+        #endregion
     }
 }
