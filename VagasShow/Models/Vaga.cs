@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace VagasShow.Models
 {
     [Serializable]
     public class Vaga
     {
+        #region Attributtes
         public Guid Id { get; private set; }
 
         public DateTime DataDeCriacao { get; private set; }
@@ -28,12 +26,14 @@ namespace VagasShow.Models
 
         [DisplayName("Remuneração")]
         public decimal? Remuneracao { get; set; }
+        #endregion
 
+        #region Constructor
         public Vaga()
         {
 
         }
-
+        
         public Vaga(string titulo, string cargo, string descricao, decimal? remuneracao)
         {
             ValidaIsNullOrWhiteSpace("Titulo", titulo);
@@ -47,13 +47,9 @@ namespace VagasShow.Models
             this.Remuneracao = remuneracao;
             this.PreencheIdData();
         }
+        #endregion
 
-        public void PreencheIdData()
-        {
-            this.Id = Guid.NewGuid();
-            this.DataDeCriacao = DateTime.Now;
-        }
-
+        #region Private Methods
         private void ValidaNegative(string field, decimal? value)
         {
             if (value != null && value < 0)
@@ -65,5 +61,14 @@ namespace VagasShow.Models
             if (string.IsNullOrWhiteSpace(value))
                 throw new ArgumentException(field + " não pode ser nulo ou em branco.");
         }
+        #endregion
+
+        #region Public Methods
+        public void PreencheIdData()
+        {
+            this.Id = Guid.NewGuid();
+            this.DataDeCriacao = DateTime.Now;
+        }
+        #endregion
     }
 }

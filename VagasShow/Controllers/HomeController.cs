@@ -1,23 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using VagasShow.Reposistory;
+﻿using System.Web.Mvc;
+using VagasShow.Business;
 
 namespace VagasShow.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
-        {
-            return View(Memoria.GetVagas());
-        }
-
+        #region Http Methods
         [HttpPost]
         public ActionResult Index(string pesquisa)
         {
-            return View(Memoria.GetVagas(pesquisa));
+            return View(new VagaBusiness().GetVagas(pesquisa));
+        }
+
+        [HttpPost]
+        public ActionResult Create(VagasShow.Models.Vaga vaga)
+        {
+            new VagaBusiness().Add(vaga);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Limpar()
+        {
+            new VagaBusiness().CleanVagas();
+            return RedirectToAction("Index");
+        }
+        #endregion
+
+        #region Methods
+        public ActionResult Index()
+        {
+            return View(new VagaBusiness().GetVagas());
         }
 
         public ActionResult About()
@@ -34,21 +48,6 @@ namespace VagasShow.Controllers
         {
             return View("Create");
         }
-
-        [HttpPost]
-        public ActionResult Create(VagasShow.Models.Vaga vaga)
-        {
-            vaga.PreencheIdData();
-            Memoria.Add(vaga);
-
-            return RedirectToAction("Index");
-        }
-
-        [HttpGet]
-        public ActionResult Limpar()
-        {
-            Memoria.LimpaVagas();
-            return RedirectToAction("Index");
-        }
+        #endregion
     }
 }
